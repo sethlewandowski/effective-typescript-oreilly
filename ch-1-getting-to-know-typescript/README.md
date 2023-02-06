@@ -45,4 +45,30 @@ Under this config, the following code would pass the TS compliation.
 	return a + b;
 }`
 
-Hi Jonny
+You should take on the challenge of enabling 'noImplicitAny' when you're starting a new project as it forces you to correctly type everything. In a situation where you're updating a js project to ts, you wouldn't want to do this however. 
+
+#### strictNullChecks
+
+strictNullChecks controls whether null and undefined are permissible values in every type. 
+
+With strictNullChecks disabled, something like this would be okay:
+
+`
+const name: string = null; 
+` 
+
+However, with strictNullChecks enabled (true), you would need to update the above statement to:
+
+`const name: string | null = null;`
+
+Same advice goes for strictNullChecks as for noImplicitAny. If you're starting a fresh repo, enable it and use TS to it's fullest. However, if you're bringing an old js-only project up to ts standards, you probably want to disable this as you will have a flurry of errors looking like:
+
+` Type 'null' is not assignable to type .... `
+or another fan favorite: 
+`undefind is not an object `
+
+#### strict setting
+
+If you want to enforce the strictest settings including the two above and others, simply enable strict in your ts config and you won't have to explicitly set the others. This is the ideal and will likely be painful at first, but will force you to use the language to it's fullest. 
+
+Remember - keep ts settings the same across your team as you won't be able to reproduce certain errors without doing so. 
