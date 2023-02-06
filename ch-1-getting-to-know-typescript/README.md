@@ -72,3 +72,40 @@ or another fan favorite:
 If you want to enforce the strictest settings including the two above and others, simply enable strict in your ts config and you won't have to explicitly set the others. This is the ideal and will likely be painful at first, but will force you to use the language to it's fullest. 
 
 Remember - keep ts settings the same across your team as you won't be able to reproduce certain errors without doing so. 
+
+# Item 3 - Understand that code gen is independent of types
+
+## The TypeScript Compiler (tsc) does two things:
+1. Converts next-gen TS/JS to an older version of JS that works in the browser (process called transpiling);
+2. Checks your code for type errors
+
+It's important to note that these two behaviors are independent of each other. Meaning, a type error *can* still produce a code output. 
+
+We can think of type errors as warnings - they will indicate that there is a problem, but the code will still build. 
+
+| Saying your code "doesn't compile" isn't technically correct. Better to say your code has errors or that it doesn't type check.
+
+## Typescript types have no runtime performance
+
+Because types and type operations are erased when you generate JS, they have no effect on runtime performance. 
+TS static types are truly zero cost.
+
+# Item 4 - Get comfortable with structural typing
+
+- JS is duck typed and TS uses structrual typing to model this (values assignalbe to your interfaces might have properties beyond those explicitly listed in your type declarations). Types are not "sealed." 
+
+# Item 5 - Limit use of the *any* type. 
+
+TS's type system is both *gradual* and *optional* 
+
+*Gradual* because you can add types to your code bit by bit
+
+*Optional* because you can disable the type checker whenever you like. 
+
+Using *any* pretty much eliminates the type safety all together. It lets you assign a string to a number, etc. 
+
+Remeber, since js is pretty loosely typed, it is problematic to use *any* in your ts as it might introduce unexpected behavior such as that of JS being willing to implicitly convert between types. 
+
+### *Any* disables autocomplete
+
+Do you like your code editor showing you the available properties on an object? Well, *any* disables that. 
